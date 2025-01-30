@@ -18,7 +18,7 @@ import getTopicsHandler from "./src/questionsCollection/schema/topics.js";
 const app = express();
 const port = 8000;
 
-//  Middleware
+// Middleware
 app.use(bodyParser.json());
 
 // MongoDB Setup
