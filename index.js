@@ -1,19 +1,20 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { MongoClient } from "mongodb";
-import getQuestionsHandler from "./src/questionsCollection/schema/questions.js";
-import updateQuestionHandler from "./src/questionsCollection/schema/updateQuestions.js";
-import getBusinessHandler from "./src/questionsCollection/schema/BusinessCollection.js";
-import getInterpersonalHandler from "./src/questionsCollection/schema/InterpersonalCollection.js";
-import getPeopleHandler from "./src/questionsCollection/schema/PeopleCollection.js";
-import getWorkplaceHandler from "./src/questionsCollection/schema/WorkplaceCollection.js";
-import getOrganizationHandler from "./src/questionsCollection/schema/OrganizationCollection.js";
-import getLeadershipHandler from "./src/questionsCollection/schema/LeadershipCollection.js";
-import updateIsUnlockedHandler from "./src/questionsCollection/schema/isUpdatedBusinessCollection.js";
-import updatePeopleIsUnlockedHandler from "./src/questionsCollection/schema/isUpdatedPeopleCollection.js";
-import updateIsCompletedHandler from "./src/questionsCollection/schema/isCompletedBusinessCollection.js";
-import resetBusiness from "./src/questionsCollection/schema/resetBusinessCollection.js";
-import getTopicsHandler from "./src/questionsCollection/schema/topics.js";
+import getQuestionsHandler from "./api/questionsCollection/schema/questions.js";
+import updateQuestionHandler from "./api/questionsCollection/schema/updateQuestions.js";
+import getBusinessHandler from "./api/questionsCollection/schema/BusinessCollection.js";
+import getInterpersonalHandler from "./api/questionsCollection/schema/InterpersonalCollection.js";
+import getPeopleHandler from "./api/questionsCollection/schema/PeopleCollection.js";
+import getWorkplaceHandler from "./api/questionsCollection/schema/WorkplaceCollection.js";
+import getOrganizationHandler from "./api/questionsCollection/schema/OrganizationCollection.js";
+import getLeadershipHandler from "./api/questionsCollection/schema/LeadershipCollection.js";
+import updateIsUnlockedHandler from "./api/questionsCollection/schema/isUpdatedBusinessCollection.js";
+import updatePeopleIsUnlockedHandler from "./api/questionsCollection/schema/isUpdatedPeopleCollection.js";
+import updateIsCompletedHandler from "./api/questionsCollection/schema/isCompletedBusinessCollection.js";
+import resetBusiness from "./api/questionsCollection/schema/resetBusinessCollection.js";
+import getTopicsHandler from "./api/questionsCollection/schema/topics.js";
+import updateFavouriteHandler from "./api/questionsCollection/schema/FavouriteQuestions.js";
 
 const app = express();
 const port = 8000;
@@ -71,6 +72,9 @@ app.get("/", (req, res) => {
   res.send("Hello World!....");
 });
 app.get("/questions", getQuestionsHandler);
+app.post("/questions/update", updateQuestionHandler);
+app.post("/questions/favourite", updateFavouriteHandler);
+
 app.get("/topics", getTopicsHandler);
 
 app.get("/business", getBusinessHandler);
@@ -85,7 +89,6 @@ app.get("/interpersonal", getInterpersonalHandler);
 app.get("/workplace", getWorkplaceHandler);
 app.get("/organization", getOrganizationHandler);
 app.get("/leadership", getLeadershipHandler);
-app.post("/questions/update", updateQuestionHandler);
 
 // Start Server
 app.listen(port, () => {
