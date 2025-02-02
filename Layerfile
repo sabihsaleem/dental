@@ -1,21 +1,18 @@
-# Use Ubuntu 18.04 as the base image
-layer ubuntu:18.04
+#This is an example webapp.io configuration for NodeJS
+FROM vm/ubuntu:18.04
+# To note: Layerfiles create VMs, *not* containers!
 
-# Install Node.js 14 and npm
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get install -y nodejs
-RUN npm install npm@latest -g
-
-# Set the working directory
-WORKDIR /app
+# Install node
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash && \
+    apt install nodejs && \
+    rm -f /etc/apt/sources.list.d/nodesource.list
+RUN npm install -g http-server
 
 # Copy the project files
 COPY . .
 
 # Install project dependencies
 RUN npm install
-
-
 
 # Set environment variables securely
 ENV MONGODB_URI="mongodb+srv://elizabethmike123123123:Pq3Q23qGnlBjNdlI@cluster1997.oanpq.mongodb.net/?retryWrites=true&w=majority"
