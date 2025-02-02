@@ -1,20 +1,13 @@
-# Use Node.js as the base image
-FROM node:14
+layer nodejs:14
 
-# Set the working directory
 WORKDIR /app
 
-# Copy project files to the container
 COPY . .
 
-# Install project dependencies
 RUN npm install
 
-# Expose the port the application runs on
 EXPOSE 8000
 
-# Set environment variables for MongoDB (replace these as needed)
 ENV MONGODB_URI="mongodb+srv://elizabethmike123123123:Pq3Q23qGnlBjNdlI@cluster1997.oanpq.mongodb.net/?retryWrites=true&w=majority"
 
-# Command to start the server
 CMD ["node", "index.js"]
