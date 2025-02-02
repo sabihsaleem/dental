@@ -1,23 +1,15 @@
-# Use Ubuntu 18.04 as the base VM
+#This is an example webapp.io configuration for NodeJS
 FROM vm/ubuntu:18.04
+# To note: Layerfiles create VMs, *not* containers!
 
-# Install Node.js 16 (compatible with optional chaining)
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash && \
-    apt install nodejs -y && \
+# Install node
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash && \
+    apt install nodejs && \
     rm -f /etc/apt/sources.list.d/nodesource.list
 RUN npm install -g http-server
 
-# Copy the project files
 COPY . .
+RUN echo 'hello' > hello.html
 
-# Install project dependencies
-RUN npm install
-
-# Set environment variables securely
-ENV MONGODB_URI="mongodb+srv://elizabethmike123123123:Pq3Q23qGnlBjNdlI@cluster1997.oanpq.mongodb.net/?retryWrites=true&w=majority"
-
-# Start the backend server
-RUN BACKGROUND node index.js
-
-# Expose the web server to LayerCI
+RUN BACKGROUND http-server -p 8000
 EXPOSE WEBSITE http://localhost:8000
