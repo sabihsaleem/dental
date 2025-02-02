@@ -6,6 +6,6 @@ RUN sudo npm install npm@latest -g
 
 
 COPY . .
-RUN yarn install
-RUN BACKGROUND nodemon index.js
+RUN npm install
+RUN BACKGROUND node index.js
 EXPOSE WEBSITE http://localhost:8000
