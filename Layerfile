@@ -1,13 +1,20 @@
-layer nodejs:14
+# Use the official Node.js environment from LayerCI
+nodejs 14
 
+# Set the working directory
 WORKDIR /app
 
+# Copy the project files
 COPY . .
 
+# Install the project dependencies
 RUN npm install
 
+# Expose the application's port
 EXPOSE 8000
 
-ENV MONGODB_URI="mongodb+srv://elizabethmike123123123:Pq3Q23qGnlBjNdlI@cluster1997.oanpq.mongodb.net/?retryWrites=true&w=majority"
+# Set environment variables securely
+ENV MONGODB_URI=mongodb+srv://elizabethmike123123123:Pq3Q23qGnlBjNdlI@cluster1997.oanpq.mongodb.net/?retryWrites=true&w=majority
 
+# Command to start the server
 CMD ["node", "index.js"]
